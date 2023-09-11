@@ -168,7 +168,7 @@ export default class ExtensionEfficiency {
   }
 
   toggleInputs(data, input, show) {
-    input.hidden = !show
+    if (input) input.hidden = !show
   }
 
   xyCkptRefinerOptionsRemove(data, input) {
