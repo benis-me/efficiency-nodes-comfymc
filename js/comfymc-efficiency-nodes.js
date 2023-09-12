@@ -252,14 +252,19 @@ export default class ExtensionEfficiency {
             this.toggleInputs(data, secondInput, true) // clip_str
             this.toggleInputs(data, thirdInput, false) // lora_wt
           }
-        } else if (
-          inputModeValue.includes('Names+Weights') ||
-          inputModeValue.includes('+ClipSkip')
-        ) {
-          this.toggleInputs(data, firstInput, true)
+        } else if (mode === 'Checkpoint') {
+          if (inputModeValue.includes('ClipSkip')) {
+            toggleInputs(node, firstInput, true)
+          }
+          if (inputModeValue.includes('VAE')) {
+            toggleInputs(node, secondInput, true)
+          }
         }
-        if (!inputModeValue.includes('Names') && mode !== 'LoRA Stacker') {
-          this.toggleInputs(data, secondInput, true)
+        if (mode === 'LoRA') {
+          if (inputModeValue.includes('Weights')) {
+            this.toggleInputs(data, firstInput, true)
+            this.toggleInputs(data, secondInput, true)
+          }
         }
       } else {
         this.toggleInputs(data, nameInput, false)
